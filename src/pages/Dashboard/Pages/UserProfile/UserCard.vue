@@ -36,5 +36,8 @@
   export default {}
 </script>
 <style>
-
+  .card-user {
+    position: sticky;
+    top: 15px;
+  }
 </style>

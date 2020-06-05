@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div class="col-12">
+      <div class="h2">Личный кабинет</div>
+    </div>
     <div class="col-lg-8 col-md-7">
       <edit-profile-form>
 

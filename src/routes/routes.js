@@ -196,7 +196,7 @@ let lockPage = {
 const routes = [
   {
     path: '/',
-    redirect: '/admin/overview'
+    redirect: '/pages/user'
   },
   componentsMenu,
   formsMenu,

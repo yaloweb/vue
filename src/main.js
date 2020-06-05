@@ -14,15 +14,17 @@ import routes from './routes/routes'
 //store
 import store from './store/store'
 
-// plugin setup
-Vue.use(VueRouter)
-Vue.use(LightBootstrap)
-
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
   linkActiveClass: 'active'
 })
+
+const VueInputMask = require('vue-inputmask').default
+
+Vue.use(VueInputMask)
+Vue.use(VueRouter)
+Vue.use(LightBootstrap)
 
 let app
 

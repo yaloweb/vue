@@ -13,7 +13,7 @@ export default {
     async logout() {
       await firebase.auth().signOut()
     },
-    async register({dispatch}, {email, password, name, surname, middleName}) {
+    async register({dispatch, commit}, {email, password, name, surname, middleName}) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
         const uid = await dispatch('getUid')

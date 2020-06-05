@@ -119,3 +119,12 @@
     transform: scale(0.75);
   }
 }
+
+.small-padding {
+    margin-left: -6px !important;
+    margin-right: -6px !important;
+}
+
+.small-padding [class*=col-] {
+    padding: 6px !important;
+}

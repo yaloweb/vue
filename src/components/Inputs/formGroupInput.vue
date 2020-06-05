@@ -26,6 +26,7 @@
         v-bind="$attrs"
         class="form-control"
         :class="[{valid: value && !error}, inputClasses]"
+        v-mask="mask"
         aria-describedby="addon-right addon-left">
     </slot>
     <span v-if="addonRightIcon || $slots.addonRight" class="input-group-addon input-group-append">
@@ -43,6 +44,7 @@
   </div>
 </template>
 <script>
+
   export default {
     inheritAttrs: false,
     name: 'fg-input',
@@ -54,7 +56,8 @@
       inputClasses: String,
       value: [String, Number],
       addonRightIcon: String,
-      addonLeftIcon: String
+      addonLeftIcon: String,
+      mask: Object
     },
     data () {
       return {

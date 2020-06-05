@@ -100,9 +100,9 @@
       async onRegisterSubmit() {
         try {
             await this.$store.dispatch('register', this.formData)
+            this.$router.push('admin/overview')
         }
-        catch (e) {
-        }
+        catch (e) {}
       },
     },
     beforeDestroy() {

@@ -100,6 +100,7 @@
 <script>
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
   import messages from '@/util/translate'
+  import swal from 'sweetalert2'
 
   export default {
     components: {
@@ -127,7 +128,15 @@
     },
     watch: {
       error(fbError) {
-        this.$error(messages[fbError.code] || 'Что-то пошло не так!')
+        swal({
+          title: `${messages[fbError.code] != null ? messages[fbError.code] : 'Что-то пошло не так!'}`,
+          type: 'warning',
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonClass: 'btn btn-danger btn-fill',
+          cancelButtonText: 'Закрыть',
+          buttonsStyling: false
+        })
       }
     },
     methods: {
