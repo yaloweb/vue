@@ -7,28 +7,19 @@
     <div>
       <div class="author">
         <img class="avatar border-gray" src="static/img/default-avatar.png" alt="...">
-        <h4 class="title">Tania Keatley
+        <h4 class="title">Ольга Владимировна
           <br>
           <a href="#">
-            <small>tania123</small>
+            <small>mail@mail.ru</small>
           </a>
         </h4>
       </div>
       <p class="description text-center">
         <span>
-          "Lamborghini Mercy
-          <br>Your chick she so thirsty
-          <br>I'm in that two seat Lambo"
+          "Телефон:<br>
+          +7 919 919-99-99
         </span>
       </p>
-    </div>
-    <hr>
-    <div class="text-center">
-      <div>
-        <button type="button" class="btn btn-simple btn-link btn-icon"><i class="fa fa-facebook-square"></i></button>
-        <button type="button" class="btn btn-simple btn-link btn-icon"><i class="fa fa-twitter"></i></button>
-        <button type="button" class="btn btn-simple btn-link btn-icon"><i class="fa fa-google-plus-square"></i></button>
-      </div>
     </div>
   </card>
 </template>

@@ -8,11 +8,18 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
+//audio plugin
+import VueAudio from 'vue-audio-better'
+
 // router setup
 import routes from './routes/routes'
 
 //store
 import store from './store/store'
+
+// Validation plugin used to validate forms
+import VeeValidate, { Validator } from 'vee-validate'
+import ru from 'vee-validate/dist/locale/ru'
 
 // configure router
 const router = new VueRouter({
@@ -25,6 +32,10 @@ const VueInputMask = require('vue-inputmask').default
 Vue.use(VueInputMask)
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
+Vue.use(VueAudio)
+Vue.use(VeeValidate)
+
+Validator.localize('ru', ru);
 
 let app
 

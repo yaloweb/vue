@@ -1,7 +1,5 @@
 import './polyfills'
 // Notifications plugin. Used on Notifications page
-// Validation plugin used to validate forms
-import VeeValidate from 'vee-validate'
 // A plugin file where you could register global components used across the app
 import GlobalComponents from './globalComponents'
 // A plugin file where you could register global directives
@@ -30,6 +28,5 @@ export default {
     Vue.use(SideBar)
     Vue.use(NotificationPlugin)
     Vue.use(VueTabs)
-    Vue.use(VeeValidate)
   }
 }

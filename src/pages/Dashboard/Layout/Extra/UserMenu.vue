@@ -7,36 +7,9 @@
       <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
            <span>
              {{title}}
-             <b class="caret"></b>
           </span>
       </a>
       <div class="clearfix"></div>
-      <div>
-        <el-collapse-transition>
-          <ul class="nav" v-show="!isClosed">
-            <slot>
-              <li>
-                <a class="profile-dropdown" href="#pablo">
-                  <span class="sidebar-mini">MP</span>
-                  <span class="sidebar-normal">My Profile</span>
-                </a>
-              </li>
-              <li>
-                <a class="profile-dropdown" href="#pablo">
-                  <span class="sidebar-mini">EP</span>
-                  <span class="sidebar-normal">Edit Profile</span>
-                </a>
-              </li>
-              <li>
-                <a class="profile-dropdown" href="#pablo">
-                  <span class="sidebar-mini">S</span>
-                  <span class="sidebar-normal">Settings</span>
-                </a>
-              </li>
-            </slot>
-          </ul>
-        </el-collapse-transition>
-      </div>
     </div>
   </div>
 </template>
@@ -50,7 +23,7 @@
     props: {
       title: {
         type: String,
-        default: 'Tania Andrew'
+        default: 'Ольга Владимировна'
       }
     },
     data () {
