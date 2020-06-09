@@ -1,0 +1,65 @@
+$time: all .3s ease
+
+body
+  *
+    word-break: normal !important
+
+.service-item
+  transition: $time
+  cursor: pointer
+  &:hover
+    transform: scale(1.05)
+
+.service-info-main
+  display: flex
+
+.service-info-img
+  margin-right: 30px
+  img
+    width: 196px
+
+.service-info-main-text
+  flex-grow: 1
+  .h4, .h3
+    margin-top: 0
+
+.custom-ol
+  counter-reset: myCounter
+  padding-left: 0
+  margin-left: 0
+  padding-right: 0
+  margin-right: 0
+  li
+    list-style-type: none
+    margin-bottom: 7px
+    position: relative
+    padding-left: 32px
+    &:before
+      counter-increment: myCounter
+      content: counter(myCounter)
+      position: absolute
+      width: 24px
+      height: 24px
+      left: 0
+      top: -1px
+      background-color: #33CCED
+      color: #fff
+      line-height: 24px
+      text-align: center
+
+.service-price
+  font-size: 24px
+  span
+    color: #87CB16
+
+.service-confirm-footer
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.service-total
+  font-size: 24px
+
+.service-confirm-btn
+  .btn
+    margin: 0

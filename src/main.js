@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LightBootstrap from './light-bootstrap-main'
+import CustomSass from './assets/sass/custom.sass'
 // Plugins
 import App from './App.vue'
 // firebase

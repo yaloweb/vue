@@ -41,6 +41,10 @@ const Calendar = () => import('src/pages/Dashboard/Calendar/CalendarRoute.vue')
 // Charts
 const Charts = () => import('src/pages/Dashboard/Charts.vue')
 
+//Services
+const MyServices = () => import('src/pages/Dashboard/Services/MyServices')
+const ServicesList = () => import('src/pages/Dashboard/Services/ServicesList')
+
 let componentsMenu = {
   path: '/components',
   component: DashboardLayout,
@@ -193,6 +197,23 @@ let lockPage = {
   component: Lock
 }
 
+let servicesMenu = {
+  path: '/services',
+  component: DashboardLayout,
+  redirect: '/services/my',
+  children: [
+    {
+      path: 'my',
+      name: 'Мои услуги',
+      component: MyServices
+    },
+    {
+      path: 'list',
+      name: 'Все услуги',
+      component: ServicesList
+    }]
+}
+
 const routes = [
   {
     path: '/',
@@ -206,6 +227,7 @@ const routes = [
   loginPage,
   registerPage,
   lockPage,
+  servicesMenu,
   {
     path: '/admin',
     component: DashboardLayout,

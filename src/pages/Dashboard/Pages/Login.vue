@@ -13,7 +13,6 @@
                           placeholder="Введите email"
                           type="email"
                           v-model="formData.email">
-
                 </fg-input>
                 <fg-input label="Пароль"
                           type="password"
