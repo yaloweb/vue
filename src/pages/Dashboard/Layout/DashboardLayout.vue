@@ -11,6 +11,7 @@
           <sidebar-item :link="{name: 'Мои услуги', path: '/services/my'}"></sidebar-item>
           <sidebar-item :link="{name: 'Все услуги', path: '/services/list'}"></sidebar-item>
         </sidebar-item>
+        <sidebar-item :link="{name: 'Заявки', icon: 'nc-icon nc-bullet-list-67', path: '/orders/list'}"></sidebar-item>
 
         <hr>
 

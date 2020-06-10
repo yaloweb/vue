@@ -63,3 +63,173 @@ body
 .service-confirm-btn
   .btn
     margin: 0
+
+.filter-card
+  .card-body
+    padding: 15px
+
+.search-form
+  position: relative
+  flex-grow: 1
+  margin-left: 10px
+  .form-group
+    margin: 0
+
+.search-button
+  position: absolute
+  top: 0
+  right: 0
+  background-color: transparent !important
+  border: none
+  color: #000 !important
+  width: 40px
+  height: 40px
+  line-height: 45px
+  padding: 0
+  font-size: 21px
+  margin: 0
+  overflow: hidden
+
+.filter-row
+  display: flex
+  margin-bottom: 10px
+  .row
+    flex-grow: 1
+
+.view-types
+  display: flex
+  margin-left: 5px
+  margin-top: 32px
+
+.view-types-item
+  border-radius: 4px
+  width: 40px
+  min-width: 40px
+  height: 40px
+  margin-left: 5px
+  background-color: #E3E3E3
+  cursor: pointer
+  position: relative
+  transition: $time
+  &.active
+    background-color: #33CCED
+    color: #fff
+
+.view-list
+  display: flex
+  align-items: center
+  justify-content: center
+  color: #000
+  span
+    display: flex
+    &:after
+      content: '\ea15'
+      font-family: 'nucleo-icons'
+      font-size: 22px
+
+.view-grid
+  display: flex
+  align-items: flex-start
+  &.active span
+    background-color: #fff
+  span
+    position: relative
+    display: inline-block
+    background-color: #7D7B7D
+    width: 10px
+    height: 5px
+    border-radius: 3px
+    margin-left: 2px
+    margin-top: 10px
+    transition: $time
+    &:after,
+    &:before
+      content: ''
+      position: absolute
+      width: 100%
+      height: 100%
+      background-color: inherit
+      border-radius: inherit
+    &:after
+      left: 13px
+      top: 7px
+    &:before
+      left: 26px
+      top: 14px
+
+.table-overflow-visible
+  .el-table__header-wrapper
+    overflow: visible
+  .el-table th
+    overflow: visible
+    .cell
+      overflow: visible
+  .el-table
+    overflow: visible
+.add-column
+  .dropdown-toggle
+    &:after
+      display: none
+  .dropdown-toggle
+    padding: 0
+    width: 40px
+    height: 40px
+    background-color: #888
+    color: #fff !important
+    border-radius: 4px
+    display: flex
+    align-items: center
+    justify-content: center
+    .nc-icon
+      transform: translateY(-1px)
+  .dropdown
+    display: flex
+    justify-content: center
+  .dropdown-menu
+    overflow: hidden
+  .dropdown-item
+    position: relative
+    padding-left: 20px !important
+    &:before
+      content: '\f00c'
+      font-family: fontawesome
+      position: absolute
+      left: 6px
+      top: 8px
+      font-size: 10px
+      color: #28a745
+      transition: $time
+      transform: scale(0)
+  .dropdown-active
+    &:before
+      transform: scale(1)
+
+.table-scroll
+  *
+    white-space: nowrap !important
+
+.orders-drag-row
+  display: flex
+
+.orders-drag-col
+  width: 100%
+  flex-basis: 0
+  flex-grow: 1
+  max-width: 100%
+  background-color: #EBECF0
+  margin: 0 4px
+  border-radius: 4px
+  padding: 25px 15px
+  display: flex
+  flex-direction: column
+  .list-group-item
+    margin-bottom: 5px
+    border-radius: 4px
+    cursor: pointer
+  .sortable-chosen
+    cursor: grabbing
+  .list-group
+    flex-grow: 1
+    span
+      display: block
+      height: 100%

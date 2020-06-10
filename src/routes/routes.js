@@ -45,6 +45,9 @@ const Charts = () => import('src/pages/Dashboard/Charts.vue')
 const MyServices = () => import('src/pages/Dashboard/Services/MyServices')
 const ServicesList = () => import('src/pages/Dashboard/Services/ServicesList')
 
+//Orders
+const Orders = () => import('src/pages/Dashboard/Orders/List')
+
 let componentsMenu = {
   path: '/components',
   component: DashboardLayout,
@@ -214,6 +217,19 @@ let servicesMenu = {
     }]
 }
 
+let ordersMenu = {
+  path: '/orders',
+  component: DashboardLayout,
+  redirect: '/orders/list',
+  children: [
+    {
+      path: 'list',
+      name: 'Заявки',
+      component: Orders
+    }
+  ]
+}
+
 const routes = [
   {
     path: '/',
@@ -228,6 +244,7 @@ const routes = [
   registerPage,
   lockPage,
   servicesMenu,
+  ordersMenu,
   {
     path: '/admin',
     component: DashboardLayout,
