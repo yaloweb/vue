@@ -33,8 +33,7 @@
                                v-model="user.religion">
                         <el-option v-for="religion in religions"
                                    :value="religion.id"
-                                   :label="religion.name"
-                                   :key="religion.name">
+                                   :label="religion.name">
                         </el-option>
                     </el-select>
                 </div>

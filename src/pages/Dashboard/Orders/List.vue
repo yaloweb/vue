@@ -15,8 +15,7 @@
                                        v-model="citySearch">
                                 <el-option v-for="citiesItem in cities"
                                            :value="citiesItem.id"
-                                           :label="citiesItem.name"
-                                           :key="citiesItem.name">
+                                           :label="citiesItem.name">
                                 </el-option>
                             </el-select>
                         </div>
@@ -30,8 +29,7 @@
                                        v-model="statusSearch">
                                 <el-option v-for="statusesItem in statuses"
                                            :value="statusesItem.id"
-                                           :label="statusesItem.name"
-                                           :key="statusesItem.name">
+                                           :label="statusesItem.name">
                                 </el-option>
                             </el-select>
                         </div>
@@ -45,27 +43,26 @@
                                        v-model="pricesSearch">
                                 <el-option v-for="pricesItem in prices"
                                            :value="pricesItem.id"
-                                           :label="convertPrice(pricesItem)"
-                                           :key="convertPrice(pricesItem)">
+                                           :label="convertPrice(pricesItem)">
                                 </el-option>
                             </el-select>
                         </div>
                     </div>
                 </div>
                 <div class="view-types">
-                    <div :class="[{'active': viewTypeList}, 'view-types-item view-list']"
-                         @click="viewTypeList = !viewTypeList">
+                    <div :class="[{'active': viewTypeList1}, 'view-types-item view-list']"
+                         @click="changeViewType(1)">
                         <span></span>
                     </div>
-                    <div :class="[{'active': !viewTypeList}, 'view-types-item view-grid']"
-                         @click="viewTypeList = !viewTypeList">
+                    <div :class="[{'active': viewTypeList2}, 'view-types-item view-grid']"
+                         @click="changeViewType(2)">
                         <span></span>
                     </div>
                 </div>
             </div>
         </card>
 
-        <card v-show="viewTypeList"
+        <card v-show="viewTypeList1"
               title="Список заявок">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap">
@@ -77,7 +74,6 @@
                         <el-option
                                 class="select-default"
                                 v-for="item in pagination.perPageOptions"
-                                :key="item"
                                 :label="item"
                                 :value="item">
                         </el-option>
@@ -97,7 +93,6 @@
                                   empty-text="Заявок нет"
                                   border>
                             <el-table-column v-for="column in tableColumns"
-                                             :key="column.label"
                                              :min-width="column.minWidth"
                                              :prop="column.prop"
                                              :label="column.label"
@@ -141,7 +136,7 @@
             </div>
         </card>
 
-        <card v-show="!viewTypeList"
+        <card v-show="viewTypeList2"
               title="Список заявок">
 
             <div class="orders-drag-row">
@@ -152,17 +147,15 @@
                                :list="draggableListItem.list"
                                group="people"
                                @change="dragChanged">
-                        <transition-group type="transition" name="flip-list">
-                            <div class="list-group-item"
-                                 v-for="element in draggableListItem.list"
-                                 :key="element.name">
-                                <div class="drag-card">
-                                    <div class="h6">{{element.name}}</div>
-                                    <div><i class="fa fa-phone"></i>{{element.phone}}</div>
-                                    <div><i class="fa fa-map-marker"></i>{{element.city}}</div>
-                                </div>
+                        <div class="list-group-item"
+                             v-for="element in draggableListItem.list">
+                            <div class="drag-card">
+                                <div class="h6">{{element.name}}</div>
+                                <div class="drag-card-info"><i class="fa fa-phone"></i> {{element.phone}}</div>
+                                <div class="drag-card-info"><i class="fa fa-map-marker"></i> {{element.city}}</div>
+                                <div class="drag-card-info"><i class="fa fa-money"></i> {{element.price}} руб.</div>
                             </div>
-                        </transition-group>
+                        </div>
                     </draggable>
                 </div>
             </div>
@@ -190,7 +183,8 @@
     },
     data() {
       return {
-        viewTypeList: true,
+        viewTypeList1: true,
+        viewTypeList2: false,
         citySearch: 0,
         statusSearch: 0,
         pricesSearch: 0,
@@ -249,85 +243,885 @@
         ],
         tableData: [
           {
-            'id': 1,
-            'name': 'Лапенко Игорь Николаевич',
-            'phone': '+7 919 919-99-99',
-            'status': 1,
-            'price': 100000,
-            'city': 'Москва',
-            'birthDay': '25/05/1979',
-            'religion': 1,
+            "id": 1,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 40000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
           },
           {
-            'id': 2,
-            'name': 'Бодрова Наталья Владимировна',
-            'phone': '+7 919 919-99-99',
-            'status': 2,
-            'price': 150000,
-            'city': 'Казань',
-            'birthDay': '15/12/1968',
-            'religion': 4,
+            "id": 2,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
           },
           {
-            'id': 3,
-            'name': 'Кулич Евгений Баженович',
-            'phone': '+7 919 919-99-99',
-            'status': 3,
-            'price': 50000,
-            'city': 'Москва',
-            'birthDay': '01/10/1982',
-            'religion': 1,
+            "id": 3,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
           },
           {
-            'id': 4,
-            'name': 'Салахова Кристина Андреевна',
-            'phone': '+7 919 919-99-99',
-            'status': 4,
-            'price': 110000,
-            'city': 'Санкт-Петербург',
-            'birthDay': '5/05/1961',
-            'religion': 2,
+            "id": 4,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
           },
           {
-            'id': 5,
-            'name': 'Попов Дмитрий Александрович',
-            'phone': '+7 919 919-99-99',
-            'status': 5,
-            'price': 80000,
-            'city': 'Казань',
-            'birthDay': '01/02/1959',
-            'religion': 3,
+            "id": 5,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 40000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
           },
           {
-            'id': 6,
-            'name': 'Навальный Алексей Беларусович',
-            'phone': '+7 919 919-99-99',
-            'status': 1,
-            'price': 250000,
-            'city': 'Казань',
-            'birthDay': '21/04/1971',
-            'religion': 5,
+            "id": 6,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
           },
           {
-            'id': 7,
-            'name': 'Андреев Андрей Александрович',
-            'phone': '+7 919 919-99-99',
-            'status': 2,
-            'price': 180000,
-            'city': 'Москва',
-            'birthDay': '01/02/1940',
-            'religion': 2,
+            "id": 7,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
           },
           {
-            'id': 8,
-            'name': 'Карманов Семен Михайлович',
-            'phone': '+7 919 919-99-99',
-            'status': 3,
-            'price': 250000,
-            'city': 'Санкт-Петербург',
-            'birthDay': '15/05/1976',
-            'religion': 5,
+            "id": 8,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
           },
+          {
+            "id": 9,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 40000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 10,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 11,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 12,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 13,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 14,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 15,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 16,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 40000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 17,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 18,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 19,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 20,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 21,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 40000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 22,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 23,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 24,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 25,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 26,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 27,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 28,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 29,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 30,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 31,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 32,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 33,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 34,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 35,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 36,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 37,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 38,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 39,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 40,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 41,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 42,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 43,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 44,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 45,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 46,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 47,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 48,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 49,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 50,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 51,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 52,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 53,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 54,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 55,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 56,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 57,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 58,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 59,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 60,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 61,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 62,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 63,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 64,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 65,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 66,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 67,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 68,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 69,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 70,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 71,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 72,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 73,
+            "name": "Лапенко Игорь Николаевич",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 100000,
+            "city": "Москва",
+            "birthDay": "25/05/1979",
+            "religion": "Христианство",
+            "statusName": "Новая"
+          },
+          {
+            "id": 74,
+            "name": "Бодрова Наталья Владимировна",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 150000,
+            "city": "Казань",
+            "birthDay": "15/12/1968",
+            "religion": "Иудаизм",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 75,
+            "name": "Кулич Евгений Баженович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 50000,
+            "city": "Москва",
+            "birthDay": "01/10/1982",
+            "religion": "Христианство",
+            "statusName": "Анкета подтверждена"
+          },
+          {
+            "id": 76,
+            "name": "Салахова Кристина Андреевна",
+            "phone": "+7 919 919-99-99",
+            "status": 4,
+            "price": 110000,
+            "city": "Санкт-Петербург",
+            "birthDay": "5/05/1961",
+            "religion": "Ислам",
+            "statusName": "Оформлено"
+          },
+          {
+            "id": 77,
+            "name": "Попов Дмитрий Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 5,
+            "price": 80000,
+            "city": "Казань",
+            "birthDay": "01/02/1959",
+            "religion": "Буддизм",
+            "statusName": "Отказано"
+          },
+          {
+            "id": 78,
+            "name": "Навальный Алексей Беларусович",
+            "phone": "+7 919 919-99-99",
+            "status": 1,
+            "price": 250000,
+            "city": "Казань",
+            "birthDay": "21/04/1971",
+            "religion": "Индуизм",
+            "statusName": "Новая"
+          },
+          {
+            "id": 79,
+            "name": "Андреев Андрей Александрович",
+            "phone": "+7 919 919-99-99",
+            "status": 2,
+            "price": 180000,
+            "city": "Москва",
+            "birthDay": "01/02/1940",
+            "religion": "Ислам",
+            "statusName": "Анкета заполнена"
+          },
+          {
+            "id": 80,
+            "name": "Карманов Семен Михайлович",
+            "phone": "+7 919 919-99-99",
+            "status": 3,
+            "price": 250000,
+            "city": "Санкт-Петербург",
+            "birthDay": "15/05/1976",
+            "religion": "Индуизм",
+            "statusName": "Анкета подтверждена"
+          }
         ],
         fuseSearch: null,
         searchQuery: '',
@@ -349,7 +1143,6 @@
           {id: 10, name: 'Синтоизм'},
           {id: 11, name: 'Зороастризм'},
         ],
-        draggableList: [],
       }
     },
     computed: {
@@ -364,15 +1157,20 @@
         if (this.citySearch !== 0) {
           this.cities.forEach(city => {
             if (city.id == this.citySearch) {
-              result = this.fuseSearch.search(city.searchText)
+              result = result.filter(item => {
+                return item.city == city.name
+              })
             }
           })
         }
         if (this.statusSearch !== 0) {
-          this.statuses.forEach(status => {
-            if (status.id == this.statusSearch) {
-              result = this.fuseSearch.search(status.searchText)
-            }
+          result = result.filter(item => {
+            return item.status == this.statusSearch
+          })
+        }
+        if (this.prices !== 0) {
+          result = result.filter(item => {
+            return (item.price >= this.prices[this.pricesSearch].from && item.price < this.prices[this.pricesSearch].to)
           })
         }
         this.pagination.total = result.length
@@ -391,6 +1189,25 @@
       total() {
         this.pagination.total = this.tableData.length
         return this.tableData.length
+      },
+      draggableList() {
+        let draggableArray = []
+        this.statuses.forEach(status => {
+          if (status.id != 0) {
+            let statusArray = []
+            this.queriedData.forEach(tableItem => {
+              if (tableItem.status == status.id) {
+                statusArray.push(tableItem)
+              }
+            })
+            draggableArray.push({
+              statusId: status.id,
+              statusName: status.name,
+              list: statusArray
+            })
+          }
+        })
+        return draggableArray
       },
     },
     methods: {
@@ -417,6 +1234,22 @@
             return 'text-success'
           case 5:
             return 'text-danger'
+        }
+      },
+      changeViewType(type) {
+        if (type == 1) {
+          if (this.viewTypeList1 == false) {
+            this.viewTypeList1 = true
+            this.viewTypeList2 = false
+            this.pagination.perPage = this.pagination.perPageOptions[0]
+          }
+        }
+        else if (type == 2) {
+          if (this.viewTypeList2 == false) {
+            this.viewTypeList2 = true
+            this.viewTypeList1 = false
+            this.pagination.perPage = this.tableData.length
+          }
         }
       },
       addAdditionalFilters(item) {
@@ -446,25 +1279,6 @@
             tableItem.prop == item.name ? this.tableColumns.splice(tableItemIndex, 1) : false
           })
         }
-      },
-      getDraggableList() {
-        let draggableArray = []
-        this.statuses.forEach(status => {
-          if (status.id != 0) {
-            let statusArray = []
-            this.tableData.forEach(tableItem => {
-              if (tableItem.status == status.id) {
-                statusArray.push(tableItem)
-              }
-            })
-            draggableArray.push({
-              statusId: status.id,
-              statusName: status.name,
-              list: statusArray
-            })
-          }
-        })
-        this.draggableList = draggableArray
       },
       dragChanged(e) {
         if (e.added != undefined) {
@@ -506,7 +1320,6 @@
           }
         })
       })
-      this.getDraggableList()
     }
   }
 

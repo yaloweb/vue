@@ -298,8 +298,7 @@
                                                            v-model="contact.who">
                                                     <el-option v-for="option in contactsType"
                                                                :value="option.value"
-                                                               :label="option.label"
-                                                               :key="option.label">
+                                                               :label="option.label">
                                                     </el-option>
                                                 </el-select>
                                             </div>
@@ -356,8 +355,7 @@
                                                            v-model="beneficiarie.type">
                                                     <el-option v-for="option in beneficiariesType"
                                                                :value="option.value"
-                                                               :label="option.label"
-                                                               :key="option.label">
+                                                               :label="option.label">
                                                     </el-option>
                                                 </el-select>
                                             </div>
@@ -439,8 +437,7 @@
                                                :disabled="disabled.profile">
                                         <el-option v-for="religion in religions"
                                                    :value="religion.id"
-                                                   :label="religion.name"
-                                                   :key="religion.name">
+                                                   :label="religion.name">
                                         </el-option>
                                     </el-select>
                                 </div>
@@ -455,8 +452,7 @@
                                                :disabled="disabled.profile">
                                         <el-option v-for="burialPlace in burialPlaces"
                                                    :value="burialPlace.id"
-                                                   :label="burialPlace.name"
-                                                   :key="burialPlace.name">
+                                                   :label="burialPlace.name">
                                         </el-option>
                                     </el-select>
                                 </div>
@@ -471,8 +467,7 @@
                                                :disabled="disabled.profile">
                                         <el-option v-for="rite in rites"
                                                    :value="rite.id"
-                                                   :label="rite.name"
-                                                   :key="rite.name">
+                                                   :label="rite.name">
                                         </el-option>
                                     </el-select>
                                 </div>
