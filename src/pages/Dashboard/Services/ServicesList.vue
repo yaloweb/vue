@@ -7,7 +7,7 @@
             <card :title="translate(serviceKey)">
                 <div class="row">
                     <div v-for="service in serviceType"
-                         class="col-lg-2">
+                         class="col-lg-3">
                         <div class="service-item"
                              @click="openInfo(service)">
                             <div class="service-img">

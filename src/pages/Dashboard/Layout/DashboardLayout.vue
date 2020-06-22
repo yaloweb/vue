@@ -5,6 +5,9 @@
       <user-menu></user-menu>
       <mobile-menu></mobile-menu>
       <template slot-scope="props" slot="links">
+        <sidebar-item :link="{name: 'Администратор', icon: 'nc-icon nc-single-02'}">
+          <sidebar-item :link="{name: 'Управление', path: '/admin/main'}"></sidebar-item>
+        </sidebar-item>
         <sidebar-item :link="{name: 'Анкета', icon: 'nc-icon nc-notes', path: '/forms/wizard'}"></sidebar-item>
         <sidebar-item :link="{name: 'Личный кабинет', icon: 'nc-icon nc-badge', path: '/pages/user'}"></sidebar-item>
         <sidebar-item :link="{name: 'Услуги', icon: 'nc-icon nc-settings-90'}">
@@ -12,6 +15,12 @@
           <sidebar-item :link="{name: 'Все услуги', path: '/services/list'}"></sidebar-item>
         </sidebar-item>
         <sidebar-item :link="{name: 'Заявки', icon: 'nc-icon nc-bullet-list-67', path: '/orders/list'}"></sidebar-item>
+        <sidebar-item :link="{name: 'Справочники', icon: 'nc-icon nc-grid-45'}">
+          <sidebar-item :link="{name: 'Сертификаты', path: '/reference-books/sertificates'}"></sidebar-item>
+          <sidebar-item :link="{name: 'Пользователи', path: '/reference-books/users'}"></sidebar-item>
+          <sidebar-item :link="{name: 'Менеджеры', path: '/reference-books/managers'}"></sidebar-item>
+          <sidebar-item :link="{name: 'Регионы', path: '/reference-books/regions'}"></sidebar-item>
+        </sidebar-item>
 
         <hr>
 

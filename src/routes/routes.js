@@ -48,6 +48,21 @@ const ServicesList = () => import('src/pages/Dashboard/Services/ServicesList')
 //Orders
 const Orders = () => import('src/pages/Dashboard/Orders/List')
 
+//Admin
+const Admin = () => import('src/pages/Dashboard/Admin/Admin')
+
+//Reference Book - Sertificates
+const Sertificates = () => import('src/pages/Dashboard/ReferenceBooks/Sertificates')
+
+//Users
+const Users = () => import('src/pages/Dashboard/ReferenceBooks/Users')
+
+//Managers
+const Managers = () => import('src/pages/Dashboard/ReferenceBooks/Managers')
+
+//Regions
+const Regions = () => import('src/pages/Dashboard/ReferenceBooks/Regions')
+
 let componentsMenu = {
   path: '/components',
   component: DashboardLayout,
@@ -230,6 +245,47 @@ let ordersMenu = {
   ]
 }
 
+let adminPage = {
+  path: '/admin',
+  redirect: '/admin/main',
+  component: DashboardLayout,
+  children: [
+    {
+      path: 'main',
+      name: 'Admin',
+      component: Admin
+    }
+  ]
+}
+
+let referenceBooks = {
+  path: '/reference-books',
+  redirect: '/reference-books/',
+  component: DashboardLayout,
+  children: [
+    {
+      path: 'sertificates',
+      name: 'Sertificates',
+      component: Sertificates
+    },
+    {
+      path: 'users',
+      name: 'Users',
+      component: Users
+    },
+    {
+      path: 'managers',
+      name: 'Managers',
+      component: Managers
+    },
+    {
+      path: 'regions',
+      name: 'Regions',
+      component: Regions
+    }
+  ]
+}
+
 const routes = [
   {
     path: '/',
@@ -245,6 +301,8 @@ const routes = [
   lockPage,
   servicesMenu,
   ordersMenu,
+  adminPage,
+  referenceBooks,
   {
     path: '/admin',
     component: DashboardLayout,
