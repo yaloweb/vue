@@ -80,11 +80,11 @@
     data() {
       return {
         formData: {
-          name: 'Равиль',
-          surname: 'Нагаев',
-          middleName: 'Ринатович',
-          email: 'whiteravil@yandex.ru',
-          password: '123456'
+          name: '',
+          surname: '',
+          middleName: '',
+          email: '',
+          password: ''
         },
         passwordRepeat: ''
       }

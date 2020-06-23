@@ -63,6 +63,9 @@ const Managers = () => import('src/pages/Dashboard/ReferenceBooks/Managers')
 //Regions
 const Regions = () => import('src/pages/Dashboard/ReferenceBooks/Regions')
 
+//Religions
+const Religions = () => import('src/pages/Dashboard/ReferenceBooks/Religions')
+
 let componentsMenu = {
   path: '/components',
   component: DashboardLayout,
@@ -282,6 +285,11 @@ let referenceBooks = {
       path: 'regions',
       name: 'Regions',
       component: Regions
+    },
+    {
+      path: 'religions',
+      name: 'Religions',
+      component: Religions
     }
   ]
 }

@@ -5,8 +5,14 @@
     </div>
     <div class="info">
       <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
-           <span>
+           <span v-if="$store.state.userType == 1">
              {{title}}
+          </span>
+          <span v-else-if="$store.state.userType == 2">
+             Менеджер Алиса
+          </span>
+          <span v-else-if="$store.state.userType == 3">
+             Администратор
           </span>
       </a>
       <div class="clearfix"></div>

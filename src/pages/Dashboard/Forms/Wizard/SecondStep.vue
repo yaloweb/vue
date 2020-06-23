@@ -19,7 +19,7 @@
                           label="Адрес проживания"
                           name="Адрес"
                           placeholder="Пример: г.Казань, ул.Пушкина, д.7, кв.31"
-                          v-validate="modelValidations.name"
+                          v-validate="modelValidations.address"
                           :error="getError('Адрес')"
                           v-model="user.name">
                 </fg-input>
@@ -55,7 +55,7 @@
         user: {
           birthDay: '',
           address: '',
-          religion: ''
+          religion: 1
         },
         modelValidations: {
           birthDay: {

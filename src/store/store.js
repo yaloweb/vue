@@ -6,7 +6,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    error: null
+    error: null,
+    // Тип пользователя (1 - юзер, 2 - менеджер, 3 - админ)
+    userType: 3
   },
   mutations: {
     setError(state, error) {
